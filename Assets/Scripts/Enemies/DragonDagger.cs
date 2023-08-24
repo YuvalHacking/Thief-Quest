@@ -26,7 +26,7 @@ public class DragonDagger : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        enemyPatrol = transform.parent.parent.Find("Dragon_Holder").gameObject.GetComponentInChildren<EnemyPatrol>();
+        enemyPatrol = transform.parent.parent.Find("Dragon").gameObject.GetComponentInChildren<EnemyPatrol>();
     }
 
     private void Update()

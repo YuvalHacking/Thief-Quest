@@ -30,7 +30,7 @@ public class AlienAttack : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        enemyPatrol = transform.parent.parent.Find("AlienHolder").gameObject.GetComponentInChildren<EnemyPatrol>();
+        enemyPatrol = transform.parent.parent.Find("Alien").gameObject.GetComponentInChildren<EnemyPatrol>();
     }
 
     private void Update()

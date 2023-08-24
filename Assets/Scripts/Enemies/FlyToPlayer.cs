@@ -11,10 +11,15 @@ public class FlyToPlayer : MonoBehaviour
     [SerializeField] private float attackCooldown;
     [SerializeField] private int damage;
     [SerializeField] private int viewRange;
+    [SerializeField] private float attackRangeX;
+    [SerializeField] private float attackRangeY;
+
 
     [Header("Collider Parameters")]
+    [SerializeField] private float colliderDistanceAttack;
     [SerializeField] private float colliderDistanceView;
     [SerializeField] private BoxCollider2D boxCollider;
+
 
     [Header("Player Layer")]
     [SerializeField] private LayerMask playerLayer;
@@ -56,9 +61,9 @@ public class FlyToPlayer : MonoBehaviour
     private bool PlayerInAttackRange()
     {
         RaycastHit2D hit =
-            Physics2D.BoxCast(boxCollider.bounds.center + transform.right * transform.localScale.x,
-            new Vector3(boxCollider.bounds.size.x, boxCollider.bounds.size.y, boxCollider.bounds.size.z),
-            0, Vector2.left, 0, playerLayer);
+             Physics2D.BoxCast(boxCollider.bounds.center + transform.right * attackRangeX * transform.localScale.x * colliderDistanceAttack,
+             new Vector3(boxCollider.bounds.size.x * attackRangeX, boxCollider.bounds.size.y * attackRangeY, boxCollider.bounds.size.z),
+             0, Vector2.left, 0, playerLayer);
 
 
         return hit.collider != null;
@@ -85,6 +90,11 @@ public class FlyToPlayer : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        //attack
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * attackRangeX * transform.localScale.x * colliderDistanceAttack,
+           new Vector3(boxCollider.bounds.size.x * attackRangeX, boxCollider.bounds.size.y * attackRangeY, boxCollider.bounds.size.z));
+
         //view
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(boxCollider.bounds.center + transform.right * viewRange * transform.localScale.x * colliderDistanceView,
