@@ -27,8 +27,6 @@ public class Health : MonoBehaviour
         {
             if (!dead)
             {
-                Debug.Log("here");
-
                 anim.SetTrigger("Death");
 
                 //Deactivate all attached component classes
@@ -38,18 +36,6 @@ public class Health : MonoBehaviour
 
                 dead = true;
             }
-        }
-    }
-    public void AddHealth(float _value)
-    {
-        currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            TakeDamage(1);
         }
     }
 

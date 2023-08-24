@@ -16,7 +16,7 @@ public class DragonDagger : MonoBehaviour
     [Header("Player Layer")]
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private LayerMask playerProjecileLayer;
-    
+
     private float cooldownTimer = Mathf.Infinity;
 
     private Animator anim;
