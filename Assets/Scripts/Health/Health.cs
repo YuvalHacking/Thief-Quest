@@ -27,6 +27,13 @@ public class Health : MonoBehaviour
         {
             if (!dead)
             {
+                if (gameObject.tag == "Player")
+                {
+                    anim.SetBool("IsJumping", false);
+                    anim.SetBool("IsClimbing", false);
+                    anim.SetBool("IsWalking", false);
+                }
+
                 anim.SetTrigger("Death");
 
                 //Deactivate all attached component classes
