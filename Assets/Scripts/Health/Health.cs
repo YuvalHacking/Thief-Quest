@@ -1,53 +1,63 @@
 using UnityEngine;
+using System;
 
 public class Health : MonoBehaviour
 {
     [Header("Health")]
-    [SerializeField] private float startingHealth;
-    public float currentHealth { get; private set; }
-    private Animator anim;
-    private bool dead;
+    [SerializeField] private float startingHealth;  // The initial health value of the object
 
     [Header("Components")]
-    [SerializeField] private Behaviour[] components;
+    [SerializeField] private Behaviour[] components;  // Array to hold other component scripts to be disabled
+
+
+    public static event Action onPlayerDeath;
+    public float currentHealth { get; private set; }  // The current health of the object
+    private Animator anim;  // Reference to the Animator component
+    private bool dead;  // Flag to track if the object is dead
+
 
     private void Awake()
     {
-        currentHealth = startingHealth;
-        anim = GetComponent<Animator>();
+        currentHealth = startingHealth;  // Set the current health to the starting health
+        anim = GetComponent<Animator>();  // Get the Animator component of the object
     }
+
     public void TakeDamage(float _damage)
     {
+        // Reduce current health by the damage taken, clamped between 0 and starting health
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
+
         if (currentHealth > 0)
         {
-            anim.SetTrigger("Hurt");
+            anim.SetTrigger("Hurt");  // Trigger the "Hurt" animation if health is still positive
         }
         else
         {
-            if (!dead)
+            if (!dead)  // Check if the object is not already dead
             {
                 if (gameObject.tag == "Player")
                 {
+                    // If the object is tagged as "Player", reset certain animator parameters
                     anim.SetBool("IsJumping", false);
                     anim.SetBool("IsClimbing", false);
-                    anim.SetBool("IsWalking", false);
+
+                    onPlayerDeath?.Invoke();
                 }
 
-                anim.SetTrigger("Death");
+                anim.SetBool("IsWalking", false);  // Set "IsWalking" animator parameter to false
+                anim.SetTrigger("Death");  // Trigger the "Death" animation
 
-                //Deactivate all attached component classes
+                // Deactivate all attached component classes
                 foreach (Behaviour component in components)
                     component.enabled = false;
 
-
-                dead = true;
+                dead = true;  // Mark the object as dead
             }
         }
     }
 
     private void Deactivate()
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(false);  // Deactivate the entire GameObject
     }
 }

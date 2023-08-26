@@ -3,7 +3,7 @@ using Cinemachine;
 
 public class Parallax : MonoBehaviour
 {
-    [SerializeField] private CinemachineVirtualCamera camera;
+    [SerializeField] private GameObject camera;
     [SerializeField] private float parallaxEffect;
 
     private float length;
@@ -15,23 +15,17 @@ public class Parallax : MonoBehaviour
         length = GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
-    void FixedUpdate()
+    void Update()
     {
 
         float dist = (camera.transform.position.x * parallaxEffect);
 
-        float temp = (camera.transform.position.x * (1 - parallaxEffect));
+        // float temp = (camera.transform.position.x * (1 - parallaxEffect));
 
-        // if (cameraSwitcher.getActiveCamera() == virtualCamera)
-        // {
         transform.position = new Vector2(startPosition + dist, transform.position.y);
 
-        if (temp > startPosition + length) startPosition += length;
-        else if (temp < startPosition - length) startPosition -= length;
-        // }
-        // else
-        // {
-        //     transform.position = new Vector2(originalPos.x, originalPos.y);
-        // }
+        // if (temp > startPosition + length) startPosition += length;
+        // else if (temp < startPosition - length) startPosition -= length;
+
     }
 }

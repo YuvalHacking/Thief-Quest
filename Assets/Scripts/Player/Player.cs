@@ -1,10 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public float moveSpeed = 5.0f;
-    public float jumpForce = 50.0f;
-
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float jumpForce;
     [SerializeField] private LayerMask jumpableGround;
 
     private Rigidbody2D rb;
@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private Animator animator;
     private LadderMovement ladder;
     private PlayerAttack playerAttack;
+    private bool isPortal;
 
     private void Awake()
     {
@@ -29,6 +30,9 @@ public class Player : MonoBehaviour
 
     private void UserInput()
     {
+
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isPortal)
+            MovePortal();
 
         if (IsGrounded() && Input.GetButtonDown("Jump") && !ladder.isClimbing)
         {
@@ -83,13 +87,33 @@ public class Player : MonoBehaviour
     {
         return Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
+
     public bool IsJumping()
     {
         return !IsGrounded();
     }
 
+    private void MovePortal()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     public bool CanAttack()
     {
         return (!ladder.isClimbing && IsGrounded());
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Portal"))
+            isPortal = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Portal"))
+        {
+            isPortal = false;
+        }
     }
 }

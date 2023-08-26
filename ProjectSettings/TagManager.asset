@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Throwing_Star
   - Fireball
+  - Portal
   layers:
   - Default
   - TransparentFX
