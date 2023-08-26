@@ -4,6 +4,7 @@ public class AlienAttack : MonoBehaviour
 {
     [Header("Attack Parameters")]
     [SerializeField] private float attackCooldown;
+    [SerializeField] private float hitCoolDown;
     [SerializeField] private float attackRange;
     [SerializeField] private int damage;
     [SerializeField] private int viewRange;
@@ -22,6 +23,7 @@ public class AlienAttack : MonoBehaviour
     [SerializeField] private LayerMask playerProjecileLayer;
 
     private float cooldownTimer = Mathf.Infinity;
+    private float cooldownTimerCollisionHit = Mathf.Infinity;
 
     private Animator anim;
     private Health playerHealth;
@@ -30,7 +32,7 @@ public class AlienAttack : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        enemyPatrol = transform.parent.parent.Find("Alien").gameObject.GetComponentInChildren<EnemyPatrol>();
+        enemyPatrol = transform.parent.parent.Find("Alien_Holder").gameObject.GetComponentInChildren<EnemyPatrol>();
     }
 
     private void Update()
@@ -46,6 +48,7 @@ public class AlienAttack : MonoBehaviour
 
         //atttack
         cooldownTimer += Time.deltaTime;
+        cooldownTimerCollisionHit += Time.deltaTime;
 
         if (PlayerInAttackRange())
         {
@@ -127,6 +130,19 @@ public class AlienAttack : MonoBehaviour
                 return i;
         }
         return 0;
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (cooldownTimerCollisionHit >= hitCoolDown)
+            {
+                cooldownTimerCollisionHit = 0;
+                playerHealth.TakeDamage(1);
+            }
+        }
     }
 
 }

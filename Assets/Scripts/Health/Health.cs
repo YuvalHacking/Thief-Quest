@@ -4,7 +4,7 @@ using System;
 public class Health : MonoBehaviour
 {
     [Header("Health")]
-    [SerializeField] private float startingHealth;  // The initial health value of the object
+    [SerializeField] public float startingHealth;  // The initial health value of the object
 
     [Header("Components")]
     [SerializeField] private Behaviour[] components;  // Array to hold other component scripts to be disabled
@@ -54,6 +54,11 @@ public class Health : MonoBehaviour
                 dead = true;  // Mark the object as dead
             }
         }
+    }
+
+    public void AddHealth(float value)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + value, 0, startingHealth);
     }
 
     private void Deactivate()

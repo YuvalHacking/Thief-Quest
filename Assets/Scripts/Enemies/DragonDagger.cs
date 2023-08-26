@@ -4,6 +4,7 @@ public class DragonDagger : MonoBehaviour
 {
     [Header("Attack Parameters")]
     [SerializeField] private float attackCooldown;
+    [SerializeField] private float hitCoolDown;
     [SerializeField] private float attackRange;
     [SerializeField] private int damage;
     [SerializeField] private int viewRange;
@@ -18,6 +19,7 @@ public class DragonDagger : MonoBehaviour
     [SerializeField] private LayerMask playerProjecileLayer;
 
     private float cooldownTimer = Mathf.Infinity;
+    private float cooldownTimerCollisionHit = Mathf.Infinity;
 
     private Animator anim;
     private Health playerHealth;
@@ -26,7 +28,7 @@ public class DragonDagger : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        enemyPatrol = transform.parent.parent.Find("Dragon").gameObject.GetComponentInChildren<EnemyPatrol>();
+        enemyPatrol = transform.parent.parent.Find("Dragon_Holder").gameObject.GetComponentInChildren<EnemyPatrol>();
     }
 
     private void Update()
@@ -40,8 +42,9 @@ public class DragonDagger : MonoBehaviour
             enemyPatrol.isPatrol = true;
         }
 
-        //atttack
         cooldownTimer += Time.deltaTime;
+        cooldownTimerCollisionHit += Time.deltaTime;
+
 
         if (PlayerInAttackRange())
         {
@@ -106,6 +109,18 @@ public class DragonDagger : MonoBehaviour
     {
         if (PlayerInAttackRange())
             playerHealth.TakeDamage(damage);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (cooldownTimerCollisionHit >= hitCoolDown)
+            {
+                cooldownTimerCollisionHit = 0;
+                playerHealth.TakeDamage(1);
+            }
+        }
     }
 
 }

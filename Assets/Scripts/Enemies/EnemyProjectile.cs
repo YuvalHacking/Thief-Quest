@@ -35,9 +35,8 @@ public class EnemyProjectile : EnemyDamage
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-
     {
-        if (collision.tag != "Ladder" && collision.tag != "Throwing_Star")
+        if (collision.tag != "Ladder" && collision.tag != "Throwing_Star" && collision.tag != "Enemy")
         {
 
             hit = true;
