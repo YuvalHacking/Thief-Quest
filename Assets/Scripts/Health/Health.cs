@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 
+[System.Serializable]
 public class Health : MonoBehaviour
 {
     [Header("Health")]
@@ -11,7 +12,7 @@ public class Health : MonoBehaviour
 
 
     public static event Action onPlayerDeath;
-    public float currentHealth { get; private set; }  // The current health of the object
+    public float currentHealth;  // The current health of the object
     private Animator anim;  // Reference to the Animator component
     private bool dead;  // Flag to track if the object is dead
 

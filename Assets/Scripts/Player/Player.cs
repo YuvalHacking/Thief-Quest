@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     private LadderMovement ladder;
     private PlayerAttack playerAttack;
     private bool isPortal;
+    SerializationManager serializationManager;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         playerAttack = GetComponent<PlayerAttack>();
+        serializationManager = GetComponent<SerializationManager>();
     }
 
     private void Update()
@@ -95,6 +97,7 @@ public class Player : MonoBehaviour
 
     private void MovePortal()
     {
+        serializationManager.SaveToJson();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
