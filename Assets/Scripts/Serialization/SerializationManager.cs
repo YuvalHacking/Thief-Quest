@@ -12,7 +12,7 @@ public class SerializationManager : MonoBehaviour
     {
         // Get the player's Health component
         playerHealth = GetComponent<Health>();
-
+        Debug.Log(SceneManager.GetActiveScene().buildIndex);
         // Check if the current scene is the one where serialization is needed
         if (SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3)
         {
