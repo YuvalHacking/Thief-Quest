@@ -44,7 +44,7 @@ public class Health : MonoBehaviour
                     onPlayerDeath?.Invoke();
                 }
 
-                anim.SetBool("IsWalking", false);  // Set "IsWalking" animator parameter to false
+                anim.SetBool("Walk", false);  // Set "IsWalking" animator parameter to false
                 anim.SetTrigger("Death");  // Trigger the "Death" animation
 
                 // Deactivate all attached component classes

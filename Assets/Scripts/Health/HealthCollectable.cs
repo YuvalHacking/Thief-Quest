@@ -9,11 +9,11 @@ public class HealthCollectable : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         health = collision.collider.GetComponent<Health>();
-        if (collision.collider.CompareTag("Player") && health.currentHealth < health.startingHealth)
+        // if (collision.collider.CompareTag("Player") && health.currentHealth < health.startingHealth)
+        if (collision.collider.CompareTag("Player"))
         {
             health.AddHealth(healthValue);
             gameObject.SetActive(false);
         }
     }
 }
-

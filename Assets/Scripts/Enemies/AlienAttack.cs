@@ -135,12 +135,15 @@ public class AlienAttack : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (playerHealth != null)
         {
-            if (cooldownTimerCollisionHit >= hitCoolDown)
+            if (collision.gameObject.CompareTag("Player"))
             {
-                cooldownTimerCollisionHit = 0;
-                playerHealth.TakeDamage(1);
+                if (cooldownTimerCollisionHit >= hitCoolDown)
+                {
+                    cooldownTimerCollisionHit = 0;
+                    playerHealth.TakeDamage(1);
+                }
             }
         }
     }
