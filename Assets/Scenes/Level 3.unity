@@ -1768,7 +1768,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 35.778202, y: -0.5311241, z: -9.943467}
+  m_LocalPosition: {x: -27.645388, y: -18.921055, z: -9.943467}
   m_LocalScale: {x: 7, y: 7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2071,7 +2071,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.3
+  m_FillAmount: 0.5
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -2472,7 +2472,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -200, y: 349}
+  m_AnchoredPosition: {x: -130, y: 349}
   m_SizeDelta: {x: 200.075, y: 140.817}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &764616694
@@ -5096,7 +5096,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1381397772}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 48.260925, y: 5.4030657, z: -9.943467}
+  m_LocalPosition: {x: -37.819073, y: -20.756933, z: -9.943467}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5216,11 +5216,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7414914017003667654, guid: 2ea5b8a5129525e41b958c759f59ae07, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 53.98
+      value: -32.1
       objectReference: {fileID: 0}
     - target: {fileID: 7414914017003667654, guid: 2ea5b8a5129525e41b958c759f59ae07, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 21.23
+      value: -4.93
       objectReference: {fileID: 0}
     - target: {fileID: 7414914017003667654, guid: 2ea5b8a5129525e41b958c759f59ae07, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6927,7 +6927,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.3
+  m_FillAmount: 0.5
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
