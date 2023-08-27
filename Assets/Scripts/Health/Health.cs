@@ -4,23 +4,33 @@ using System;
 [System.Serializable]
 public class Health : MonoBehaviour
 {
+    // The initial health value of the object
     [Header("Health")]
-    [SerializeField] public float startingHealth;  // The initial health value of the object
+    [SerializeField] public float startingHealth;
 
+    // Array to hold other component scripts to be disabled
     [Header("Components")]
-    [SerializeField] private Behaviour[] components;  // Array to hold other component scripts to be disabled
+    [SerializeField] private Behaviour[] components;
 
-
+    // Event to be triggered on player death
     public static event Action onPlayerDeath;
-    public float currentHealth;  // The current health of the object
-    private Animator anim;  // Reference to the Animator component
-    private bool dead;  // Flag to track if the object is dead
 
+    // The current health of the object
+    public float currentHealth;
+
+    // Reference to the Animator component
+    private Animator anim;
+
+    // Flag to track if the object is dead
+    private bool dead;
 
     private void Awake()
     {
-        currentHealth = startingHealth;  // Set the current health to the starting health
-        anim = GetComponent<Animator>();  // Get the Animator component of the object
+        // Set the current health to the starting health
+        currentHealth = startingHealth;
+
+        // Get the Animator component of the object
+        anim = GetComponent<Animator>();
     }
 
     public void TakeDamage(float _damage)
@@ -42,6 +52,7 @@ public class Health : MonoBehaviour
                     anim.SetBool("IsJumping", false);
                     anim.SetBool("IsClimbing", false);
 
+                    // Invoke the onPlayerDeath event
                     onPlayerDeath?.Invoke();
                 }
 
@@ -59,11 +70,13 @@ public class Health : MonoBehaviour
 
     public void AddHealth(float value)
     {
+        // Increase current health by the specified value, clamped between 0 and starting health
         currentHealth = Mathf.Clamp(currentHealth + value, 0, startingHealth);
     }
 
+    // Deactivate the entire GameObject
     private void Deactivate()
     {
-        gameObject.SetActive(false);  // Deactivate the entire GameObject
+        gameObject.SetActive(false);
     }
 }

@@ -18,7 +18,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-
+        // Check for attack input and cooldown
         if (Input.GetButton("Fire1") && cooldownTimer > attackCooldown && player.CanAttack())
         {
             Attack();
@@ -26,7 +26,7 @@ public class PlayerAttack : MonoBehaviour
 
         cooldownTimer += Time.deltaTime;
 
-
+        // Check for attack input during jump and cooldown
         if (Input.GetButton("Fire1") && cooldownTimer > attackCooldown && player.CanAttack() && animator.GetBool("IsJumping"))
         {
             Attack();
@@ -38,8 +38,12 @@ public class PlayerAttack : MonoBehaviour
         animator.SetTrigger("Attack");
         cooldownTimer = 0;
 
-        throwingStars[FindThrowingStar()].transform.position = throwPoint.position;
-        throwingStars[FindThrowingStar()].GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x));
+        int throwingStarIndex = FindThrowingStar(); // Find an inactive throwing star
+        if (throwingStarIndex != -1)
+        {
+            throwingStars[throwingStarIndex].transform.position = throwPoint.position;
+            throwingStars[throwingStarIndex].GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x));
+        }
     }
 
     private int FindThrowingStar()
@@ -49,7 +53,6 @@ public class PlayerAttack : MonoBehaviour
             if (!throwingStars[i].activeInHierarchy)
                 return i;
         }
-        return 0;
+        return -1; // No inactive throwing stars found
     }
-
 }
